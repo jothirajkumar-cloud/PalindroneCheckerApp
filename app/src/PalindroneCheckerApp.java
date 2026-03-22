@@ -1,27 +1,36 @@
-public class UseCase4PalindromeCheckerApp {
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class UseCase6PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         // Original string
-        String text = "radar";
+        String text = "level";
 
-        // Convert string to character array
-        char[] charArray = text.toCharArray();
+        // Create Stack and Queue
+        Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
-        // Two-pointer initialization
-        int start = 0;
-        int end = charArray.length - 1;
+        // Insert characters into both Stack and Queue
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+            stack.push(ch);     // LIFO
+            queue.add(ch);      // FIFO (enqueue)
+        }
 
         boolean isPalindrome = true;
 
-        // Compare characters using two-pointer approach
-        while (start < end) {
-            if (charArray[start] != charArray[end]) {
+        // Compare dequeue (queue) with pop (stack)
+        for (int i = 0; i < text.length(); i++) {
+            char fromQueue = queue.remove(); // dequeue
+            char fromStack = stack.pop();    // pop
+
+            if (fromQueue != fromStack) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
         // Display result
